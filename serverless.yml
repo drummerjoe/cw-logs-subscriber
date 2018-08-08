@@ -22,9 +22,9 @@ functions:
     memorySize: 128
     timeout: 60
     environment:
-      LOG_GROUP_FILTER: /test/
+      LOG_GROUP_FILTER: ${file(.env.yml):subscriber.environment.LOG_GROUP_FILTER}
       FILTER_NAME: ${opt:stage, 'dev'}-${self:service}-shipper
-      FILTER_PATTERN: ''
+      FILTER_PATTERN: ${file(.env.yml):subscriber.environment.FILTER_PATTERN}
       DESTINATION_ARN: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${opt:stage, 'dev'}-${self:service}-shipper
     events:
       - cloudwatchEvent:
@@ -44,7 +44,7 @@ functions:
           - LambdaElasticsearchExecutionRole
           - Arn
     environment:
-      ES_CLUSTER_ENDPOINT: test
+      ES_CLUSTER_ENDPOINT: ${file(.env.yml):shipper.environment.ES_CLUSTER_ENDPOINT}
 
 resources:
   Resources:
