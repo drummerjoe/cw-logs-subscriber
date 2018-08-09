@@ -18,7 +18,11 @@ def handler(event, context):
     log_group_name = event['detail']['requestParameters']['logGroupName']
 
     if LOG_GROUP_FILTER in log_group_name:
+        print(f'Subscribing {log_group_name} to {DESTINATION_ARN}')
         put_subscription_filter(log_group_name)
+    else:
+        print(f'Skipping subscription for {log_group_name}. ' +
+              f'LOG_GROUP_FILTER is {LOG_GROUP_FILTER}')
 
 
 def put_subscription_filter(log_group_name):
