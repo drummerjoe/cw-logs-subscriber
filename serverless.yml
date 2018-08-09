@@ -48,6 +48,15 @@ functions:
 
 resources:
   Resources:
+    ShipperLambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: ${opt:stage, 'dev'}-${self:service}-shipper
+        Action: 'lambda:InvokeFunction'
+        Principal: 'logs.#{AWS::Region}.amazonaws.com'
+        SourceAccount: '#{AWS::AccountId}'
+        SourceArn: 'arn:aws:logs:#{AWS::Region}:#{AWS::AccountId}:*'
+
     LambdaElasticsearchExecutionRole:
       Type: AWS::IAM::Role
       Properties:
