@@ -10,7 +10,7 @@ provider:
   iamRoleStatements:
     - Effect: "Allow"
       Action:
-        - "logs:*"
+        - "logs:PutSubscriptionFilter"
       Resource:
         - "arn:aws:logs:*:*:*"
 
