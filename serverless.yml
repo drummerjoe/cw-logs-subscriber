@@ -45,6 +45,7 @@ functions:
           - Arn
     environment:
       ES_CLUSTER_ENDPOINT: ${file(.env.yml):shipper.environment.ES_CLUSTER_ENDPOINT}
+      ES_INDEX_PREFIX: ${file(.env.yml):shipper.environment.ES_INDEX_PREFIX}
 
 resources:
   Resources:
