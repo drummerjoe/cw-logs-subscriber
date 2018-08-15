@@ -50,6 +50,7 @@ resources:
   Resources:
     ShipperLambdaInvokePermission:
       Type: AWS::Lambda::Permission
+      DependsOn: LambdaElasticsearchExecutionRole
       Properties:
         FunctionName: ${opt:stage, 'dev'}-${self:service}-shipper
         Action: 'lambda:InvokeFunction'
