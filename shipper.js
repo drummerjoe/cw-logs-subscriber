@@ -69,7 +69,7 @@ function transform(payload) {
 
         // index name format: logGroup-YYYY.MM.DD
         var indexName = [
-            payload.logGroup + '-' + timestamp.getUTCFullYear(), // year
+            'cwl-' + timestamp.getUTCFullYear(), // year
             ('0' + (timestamp.getUTCMonth() + 1)).slice(-2), // month
             ('0' + timestamp.getUTCDate()).slice(-2) // day
         ].join('.');
