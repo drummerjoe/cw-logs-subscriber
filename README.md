@@ -17,11 +17,12 @@ Create/Update `.env.yml`
 subscriber:
   environment:
     LOG_GROUP_FILTER: '<filter_groups>'
-    FILTER_PATTERN: '<cw-logs-filter>'  # Leave empty if n/a
+    FILTER_PATTERN: '<cw-logs-filter>'              # Leave empty if n/a
 
 shipper:
   environment:
     ES_CLUSTER_ENDPOINT: '<es_cluster_endpoint>'
+    ES_INDEX_PREFIX: '<es_index_prefix>'            # defaults to "cwl"
 ```
 
 Deploy the stack

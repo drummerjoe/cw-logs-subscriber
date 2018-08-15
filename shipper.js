@@ -4,6 +4,8 @@ var zlib = require('zlib');
 var crypto = require('crypto');
 
 var endpoint = process.env.ES_CLUSTER_ENDPOINT
+var es_index_prefix = process.env.ES_INDEX_PREFIX
+if (es_index_prefix === undefined) es_index_prefix = 'cwl';
 
 exports.handle = function (input, context) {
     // decode input from base64
@@ -69,7 +71,7 @@ function transform(payload) {
 
         // index name format: logGroup-YYYY.MM.DD
         var indexName = [
-            'cwl-' + timestamp.getUTCFullYear(), // year
+            es_index_prefix + '-' + timestamp.getUTCFullYear(), // year
             ('0' + (timestamp.getUTCMonth() + 1)).slice(-2), // month
             ('0' + timestamp.getUTCDate()).slice(-2) // day
         ].join('.');
