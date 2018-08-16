@@ -3,7 +3,7 @@ service:
 
 plugins:
   - serverless-pseudo-parameters
-  
+
 provider:
   name: aws
   runtime: python3.6
@@ -51,7 +51,7 @@ resources:
   Resources:
     ShipperLambdaInvokePermission:
       Type: AWS::Lambda::Permission
-      DependsOn: LambdaElasticsearchExecutionRole
+      DependsOn: ShipperLambdaFunction
       Properties:
         FunctionName: ${opt:stage, 'dev'}-${self:service}-shipper
         Action: 'lambda:InvokeFunction'
