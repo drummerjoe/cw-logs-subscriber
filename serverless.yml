@@ -35,7 +35,7 @@ functions:
   shipper:
     name: ${opt:stage, 'dev'}-${self:service}-shipper
     handler: shipper.handle
-    runtime: nodejs4.3
+    runtime: nodejs10.x
     description: Ship logs to Elasticsearch
     memorySize: 128
     timeout: 10
