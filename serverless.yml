@@ -16,14 +16,14 @@ provider:
 
 functions:
   subscriber:
-    name: ${opt:stage, 'dev'}-${self:service}-subscriber
+    name: ${opt:stage, 'devops'}-${self:service}-subscriber
     handler: subscriber.handler
     description: Automatically subscribe CloudWatch Log groups to ship to AWS Elasticsearch via AWS Lambda.
     memorySize: 128
     timeout: 60
     environment:
       LOG_GROUP_FILTER: ${file(.env.yml):subscriber.environment.LOG_GROUP_FILTER}
-      FILTER_NAME: ${opt:stage, 'dev'}-${self:service}-shipper
+      FILTER_NAME: ${opt:stage, 'devops'}-${self:service}-shipper
       FILTER_PATTERN: ${file(.env.yml):subscriber.environment.FILTER_PATTERN}
       DESTINATION_ARN: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${opt:stage, 'dev'}-${self:service}-shipper
     events:
@@ -33,7 +33,7 @@ functions:
               - "aws.logs"
 
   shipper:
-    name: ${opt:stage, 'dev'}-${self:service}-shipper
+    name: ${opt:stage, 'devops'}-${self:service}-shipper
     handler: shipper.handle
     runtime: nodejs10.x
     description: Ship logs to Elasticsearch
@@ -53,7 +53,7 @@ resources:
       Type: AWS::Lambda::Permission
       DependsOn: ShipperLambdaFunction
       Properties:
-        FunctionName: ${opt:stage, 'dev'}-${self:service}-shipper
+        FunctionName: ${opt:stage, 'devops'}-${self:service}-shipper
         Action: 'lambda:InvokeFunction'
         Principal: 'logs.#{AWS::Region}.amazonaws.com'
         SourceAccount: '#{AWS::AccountId}'
